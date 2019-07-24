@@ -1,0 +1,15 @@
+---
+  - name: Create user
+    become: yes
+    user:
+      name: "{{ username }}"
+      password: "{{ password  | password_hash('sha512') }}"
+      shell: /bin/bash
+      home:  /home/{{ username }}
+      group: admin
+
+  - name: Install terminator,htop
+    become: yes
+    package:
+      name: terminator,htop
+      state: present

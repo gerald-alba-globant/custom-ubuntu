@@ -1,0 +1,10 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: false
+
+  roles:
+    - common
+    - docker
+    - fish
+#    - ubuntu-desktop

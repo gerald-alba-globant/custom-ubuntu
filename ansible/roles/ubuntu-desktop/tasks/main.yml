@@ -1,0 +1,4 @@
+- name: Install ubuntu-desktop
+  package:
+    name: ubuntu-desktop
+    state: present
