@@ -1,4 +1,10 @@
-- name: Install ubuntu-desktop
+- name: Install gnome-desktop
+  become: yes
   package:
-    name: ubuntu-desktop
+    name: "{{ item }}"
     state: present
+  with_items:
+    - gnome-session
+    - gdm3
+    - gnome-shell-extensions
+    - gnome-tweak-tool

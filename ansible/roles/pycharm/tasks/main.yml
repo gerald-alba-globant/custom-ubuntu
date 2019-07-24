@@ -1,0 +1,6 @@
+---
+  - name: Install pycharm
+    become: yes
+    package:
+      name: pycharm-community
+      state: present
