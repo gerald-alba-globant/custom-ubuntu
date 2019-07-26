@@ -1,33 +1,42 @@
 ---
-  - name: Install fish
-    become: yes
-    package:
-      name: fish
-      state: present
+- name: Create user
+  become: yes
+  user:
+    name: "{{ username }}"
+    password: "{{ password  | password_hash('sha512') }}"
+    shell: /bin/bash
+    home:  /home/{{ username }}
+    group: admin
 
-  - name: Clone oh-my-fish repo
-    git:
-      repo: "https://github.com/oh-my-fish/oh-my-fish"
-      dest: "/tmp/omf"
-      clone: yes
+- name: Install fish
+  become: yes
+  package:
+    name: fish
+    state: present
 
-  - name: Install oh-my-fish
-    become: true
-    become_user: "{{ item }}"
-    command: /tmp/omf/bin/install -y --offline --noninteractive
-    with_items: "{{ users_list }}"
+- name: Clone oh-my-fish repo
+  git:
+    repo: "https://github.com/oh-my-fish/oh-my-fish"
+    dest: "/tmp/omf"
+    clone: yes
 
-  - name: Configure theme yimmy for oh-my-fish
-    become: true
-    become_user: "{{ item }}"
-    command: fish -c "omf install yimmy"
-    with_items: "{{ users_list }}"
+- name: Install oh-my-fish
+  become: true
+  become_user: "{{ item }}"
+  command: /tmp/omf/bin/install -y --offline --noninteractive
+  with_items: "{{ users_list }}"
 
-  - name: Change default shell to fish for users
-    become: yes
-    user:
-      name: "{{ item }}"
-      shell: /usr/bin/fish
-      home:  /home/{{ item }}
-    with_items: "{{ users_list }}"
-    ignore_errors: True
+- name: Configure theme yimmy for oh-my-fish
+  become: true
+  become_user: "{{ item }}"
+  command: fish -c "omf install yimmy"
+  with_items: "{{ users_list }}"
+
+- name: Change default shell to fish for users
+  become: yes
+  user:
+    name: "{{ item }}"
+    shell: /usr/bin/fish
+    home:  /home/{{ item }}
+  with_items: "{{ users_list }}"
+  ignore_errors: True

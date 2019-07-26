@@ -1,15 +1,14 @@
 ---
-  - name: Create user
-    become: yes
-    user:
-      name: "{{ username }}"
-      password: "{{ password  | password_hash('sha512') }}"
-      shell: /bin/bash
-      home:  /home/{{ username }}
-      group: admin
+- name: Install terminator htop ansible-lint
+  become: yes
+  package:
+    name:
+      - terminator
+      - htop
+      - ansible-lint
+    state: present
 
-  - name: Install terminator,htop
-    become: yes
-    package:
-      name: terminator,htop
-      state: present
+- name: Stop unnecessary process
+  systemd:
+    state: stopped
+    name: snap

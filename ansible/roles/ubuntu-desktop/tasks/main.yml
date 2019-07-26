@@ -1,10 +1,10 @@
+---
 - name: Install gnome-desktop
   become: yes
   package:
-    name: "{{ item }}"
+    name:
+      - gnome-session
+      - gdm3
+      - gnome-shell-extensions
+      - gnome-tweak-tool
     state: present
-  with_items:
-    - gnome-session
-    - gdm3
-    - gnome-shell-extensions
-    - gnome-tweak-tool
