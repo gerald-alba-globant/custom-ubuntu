@@ -1,6 +1,5 @@
 ---
 - name: Install gnome-desktop
-  become: yes
   package:
     name:
       - gnome-session

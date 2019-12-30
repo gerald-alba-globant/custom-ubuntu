@@ -1,6 +1,5 @@
 ---
 - name: Install prerequisites
-  become: yes
   package:
     name:
       - apt-transport-https
@@ -10,29 +9,24 @@
     state: present
 
 - name: Add Docker GPG key
-  become: yes
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
 
 - name: Add Docker APT repository
-  become: yes
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable
 
 - name: Install Docker
-  become: yes
   package:
     name: docker-ce
     update_cache: yes
 
 - name: Create Docker group
-  become: yes
   group:
     name: docker
     state: present
 
 - name: Add current user to Docker group
-  become: yes
   user:
     name:  "{{ item }}"
     groups: docker
@@ -40,7 +34,6 @@
   with_items: "{{ users_list }}"
 
 - name: Download docker-compose
-  become: yes
   get_url:
     url: https://github.com/docker/compose/releases/download/1.24.1/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
@@ -48,7 +41,6 @@
     mode: 0755
 
 - name: Everybody can run docker
-  become: yes
   file:
     path: /var/run/docker.sock
     mode: '777'

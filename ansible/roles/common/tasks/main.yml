@@ -1,9 +1,26 @@
 ---
-- name: Install terminator htop ansible-lint
-  become: yes
+- name: Install terminator ansible-lint
   package:
     name:
       - terminator
-      - htop
       - ansible-lint
     state: present
+
+- name: Install gcloud, aws, az, tf, kubectl, helm, pycharm, htop with option --classic
+  snap:
+    name:
+      - google-cloud-sdk
+      - aws-cli
+      - kubectl
+      - terraform
+      - helm
+      - pycharm-community
+      - htop
+    classic: yes
+
+- name: Install azure-cli
+  snap:
+    name:
+      - azure-cli
+    classic: yes
+    channel: latest/edge

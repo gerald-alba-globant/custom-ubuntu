@@ -13,9 +13,10 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
+  #config.vm.provision :shell, inline: "sudo snap install ansible-kz6fittycent --edge"
   config.vm.provision :shell, path: "install_ansible.sh"
   config.vm.synced_folder "./ansible", "/home/vagrant/ansible"
 
-  #config.vm.provision :shell, inline: 'cd /home/vagrant/ansible && ansible-playbook -i inventory site.yml --extra-vars="username=gerald password=1"'
-  #config.vm.provision "file", source: "ansible", destination: "/home/vagrant/ansible"
+  config.vm.provision :shell, inline: 'ansible-playbook -i localhost, --extra-vars="username=gerald password=1" /home/vagrant/ansible/site.yml'
+  config.vm.provision "file", source: "ansible", destination: "/home/vagrant/ansible"
 end

@@ -1,7 +1,5 @@
 ---
 - name: Create user
-  become: yes
-  user:
     name: "{{ username }}"
     password: "{{ password  | password_hash('sha512') }}"
     shell: /bin/bash
@@ -9,7 +7,6 @@
     group: admin
 
 - name: Install fish
-  become: yes
   package:
     name: fish
     state: present
@@ -21,19 +18,18 @@
     clone: yes
 
 - name: Install oh-my-fish
-  become: true
   become_user: "{{ item }}"
   command: /tmp/omf/bin/install -y --offline --noninteractive
   with_items: "{{ users_list }}"
 
 - name: Configure theme yimmy for oh-my-fish
-  become: true
   become_user: "{{ item }}"
   command: fish -c "omf install yimmy"
   with_items: "{{ users_list }}"
 
+# chsh --shell /usr/bin/fishexit
+-
 - name: Change default shell to fish for users
-  become: yes
   user:
     name: "{{ item }}"
     shell: /usr/bin/fish

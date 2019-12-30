@@ -1,11 +1,19 @@
 ---
-- hosts: local
+- hosts: localhost
   connection: local
+  become: yes
   gather_facts: false
 
+  pre_tasks:
+    - name: Set Snap packages path
+      lineinfile:
+        dest: /etc/environment
+        state: present
+        line: 'PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"'
+
   roles:
-#    - common
-#    - docker
+    - common
+    - docker
     - fish
 #    - pycharm
 #    - ubuntu-desktop
