@@ -1,12 +1,13 @@
 ---
-- name: Install terminator ansible-lint
+- name: Install terminator ansible-lint python3-venv
   package:
     name:
       - terminator
       - ansible-lint
+      - python3-venv
     state: present
 
-- name: Install gcloud, aws, az, tf, kubectl, helm, pycharm, htop with option --classic
+- name: Install gcloud aws az tf kubectl helm pycharm htop with option --classic
   snap:
     name:
       - google-cloud-sdk
