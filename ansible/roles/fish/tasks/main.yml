@@ -1,10 +1,11 @@
 ---
 - name: Create user
+  user :
     name: "{{ username }}"
     password: "{{ password  | password_hash('sha512') }}"
     shell: /bin/bash
     home:  /home/{{ username }}
-    group: admin
+    group: root
 
 - name: Install fish
   package:
@@ -27,8 +28,7 @@
   command: fish -c "omf install yimmy"
   with_items: "{{ users_list }}"
 
-# chsh --shell /usr/bin/fishexit
--
+# chsh --shell /usr/bin/fish
 - name: Change default shell to fish for users
   user:
     name: "{{ item }}"

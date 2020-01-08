@@ -5,6 +5,8 @@
       - terminator
       - ansible-lint
       - python3-venv
+      - htop
+      - git
     state: present
 
 - name: Install gcloud aws az tf kubectl helm pycharm htop with option --classic
@@ -16,7 +18,6 @@
       - terraform
       - helm
       - pycharm-community
-      - htop
     classic: yes
 
 - name: Install azure-cli
