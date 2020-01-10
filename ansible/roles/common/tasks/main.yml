@@ -7,6 +7,7 @@
       - python3-venv
       - htop
       - git
+      - openvpn
     state: present
 
 - name: Python packages for debugging
@@ -36,6 +37,7 @@
       - slack
       - chromium
       - sublime-text
+      - vagrant
     classic: yes
 
 - name: Install azure-cli
