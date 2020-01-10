@@ -34,5 +34,10 @@
     name: "{{ item }}"
     shell: /usr/bin/fish
     home:  /home/{{ item }}
-  with_items: "{{ users_list }}"
-  ignore_errors: True
+  with_items: "{{ users_list | reject('search','root') | list }}"
+
+- name: Change default shell for root
+  user:
+    name: root
+    shell: /usr/bin/fish
+    home:  /root
