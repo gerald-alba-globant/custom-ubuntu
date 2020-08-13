@@ -1,11 +1,11 @@
 ---
-- name: Create user
-  user :
-    name: "{{ username }}"
-    password: "{{ password  | password_hash('sha512') }}"
-    shell: /bin/bash
-    home:  /home/{{ username }}
-    group: root
+#- name: Create user
+#  user :
+#    name: "{{ username }}"
+#    password: "{{ password  | password_hash('sha512') }}"
+#    shell: /bin/bash
+#    home:  /home/{{ username }}
+#    group: root
 
 - name: Install fish
   package:

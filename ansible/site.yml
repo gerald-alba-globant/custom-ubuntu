@@ -2,7 +2,7 @@
 - hosts: localhost
   connection: local
   become: yes
-  gather_facts: false
+  gather_facts: true
 
   pre_tasks:
     - name: Set Snap packages path
@@ -13,7 +13,7 @@
 
   roles:
     - common
-    - docker
+#    - docker
     - fish
 #    - pycharm
 #    - ubuntu-desktop

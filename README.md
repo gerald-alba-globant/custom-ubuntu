@@ -1,5 +1,9 @@
 ```
-wget https://raw.githubusercontent.com/gerald-axel/custom-ubuntu/master/startup.sh && \
 chmod +x startup.sh && \
 sudo ./startup.sh
 ```
+
+### Pycharm Shell Integration
+In `Tools` -> `Terminal` 
+- Uncheck `Shell Integration` solves this issue.
+- `Shell Path`: `/usr/bin/fish`
